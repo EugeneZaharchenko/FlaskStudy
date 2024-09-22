@@ -3,6 +3,7 @@ import datetime
 from flask import request
 from flask_restful import Resource
 from src import api
+from src.models import Film, db
 
 
 class Smoke(Resource):
@@ -23,6 +24,8 @@ class FilmListApi(Resource):
 
     def post(self):
         film_json = request.json
+        print(film_json)
+
         if not film_json:
             return {'message': 'Wrong data'}, 400
         try:
@@ -68,9 +71,9 @@ class FilmListApi(Resource):
         title = film_json.get('title')
         release_date = datetime.datetime.strptime(film_json.get('release_date'), '%B %d, %Y') if film_json.get(
             'release_date') else None
-        distributed_by = film_json.get('distributed_by'),
-        rating = film_json.get('rating'),
-        length = film_json.get('length'),
+        distributed_by = film_json.get('distributed_by')
+        rating = film_json.get('rating')
+        length = film_json.get('length')
         description = film_json.get('description')
 
         if title:
