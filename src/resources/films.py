@@ -53,3 +53,4 @@ class FilmListApi(Resource):
         db.session.delete(film)
         db.session.commit()
         return '', 204
+
