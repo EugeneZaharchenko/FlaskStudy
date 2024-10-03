@@ -3,6 +3,7 @@ from flask_restful import Resource
 from marshmallow import ValidationError
 from sqlalchemy.orm import joinedload, selectinload
 
+from resources.auth import token_required
 from src import db
 from src.models import Film
 from src.schemas.films import FilmSchema
@@ -11,6 +12,7 @@ from src.schemas.films import FilmSchema
 class FilmListApi(Resource):
     film_schema = FilmSchema()
 
+    @token_required
     def get(self, uuid=None):
         if not uuid:
             films = db.session.query(Film).all()
